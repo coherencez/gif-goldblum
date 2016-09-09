@@ -1,6 +1,6 @@
 'use strict'
 
-const randomInt = (min, max) => {
+module.exports = (min, max) => {
   // min = Math.ceil(min) || 1
   if(arguments.length !== 0) {
 	  min = Math.ceil(min) || 0
@@ -9,5 +9,3 @@ const randomInt = (min, max) => {
 	}
 	return null
 }
-
-module.exports = randomInt

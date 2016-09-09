@@ -10,9 +10,7 @@ const     express = require('express')
 
 // PROJECT MODULES
 	,        rndNum = require('./math')
-	,          urls = require('./urls')
 	,      parseArr = require('./parseJSON')
-	,    urlsLength = urlArr.length
 	,[,,...cliArgs] = process.argv
 
 // LOGIC
@@ -25,7 +23,7 @@ if(!cliArgs[0]) {
 // ROUTE
 app.get('/', (req,res) => {
 	let       url = `http://${cliArgs[0]}`
-	 ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=charlie+day&api_key=dc6zaTOxFJmzC'
+	 ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=jeff+goldblum&api_key=dc6zaTOxFJmzC'
 
 	fetch(gifUrl)
 		.then(res => res.json())
