@@ -6,9 +6,9 @@ const     express = require('express')
 	,       request = require('request')
 	,       cheerio = require('cheerio')
 	,         fetch = require('node-fetch')
-	,           app = express()
 
 // PROJECT MODULES
+	,           app = express()
 	,        rndNum = require('./math')
 	,      parseArr = require('./parseJSON')
 	,[,,...cliArgs] = process.argv
