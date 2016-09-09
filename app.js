@@ -3,15 +3,14 @@
 
 // THIRD PARTY MODULES
 const     express = require('express')
-	,		    request = require('request')
+	,       request = require('request')
 	,       cheerio = require('cheerio')
+	,         fetch = require('node-fetch')
 	,           app = express()
 
 // PROJECT MODULES
 	,        rndNum = require('./math')
-	,          urls = require('./urls')
-	,        urlArr = urls()
-	,    urlsLength = urlArr.length
+	,      parseArr = require('./parseJSON')
 	,[,,...cliArgs] = process.argv
 
 // LOGIC
@@ -25,17 +24,21 @@ if(!cliArgs[0]) {
 app.get('/', (req,res) => {
 	let       url = `http://${cliArgs[0]}`
 	 ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=jeff+goldblum&api_key=dc6zaTOxFJmzC'
-// grab url passed in from cli, replace images with random gif then send to browser
-	request(url, (err, _, body) => {
-		if (!err) {
-			let         $ = cheerio.load(body)
-			 ,     imgArr = Array.from($('img'))
 
-			 imgArr.forEach(v => {$(v).attr('src', urlArr[rndNum(0,urlsLength)])})
-			 imgArr.forEach(v => {$(v).data('src-*', urlArr[rndNum(0,urlsLength)])})
-			res.send($.html())
-		}
-	})
+	fetch(gifUrl)
+		.then(res => res.json())
+		.then(json => parseArr(json.data))
+		.then(arr => {
+			request(url, (err, _, body) => {
+				if (!err) {
+					let         $ = cheerio.load(body)
+					 ,     imgArr = Array.from($('img'))
+
+					imgArr.forEach(v => {$(v).attr('src', arr[rndNum(0,arr.length)])})
+					res.send($.html())
+				}
+			})
+		})
 })
 
 app.listen(8080)
