@@ -26,9 +26,9 @@ app.get('/', (req,res) => {
 	 ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=jeff+goldblum&api_key=dc6zaTOxFJmzC'
 
 	fetch(gifUrl)
-		.then(res => res.json())
+		.then(res  => res.json())
 		.then(json => parseArr(json.data))
-		.then(arr => {
+		.then(arr  => {
 			request(url, (err, _, body) => {
 				if (!err) {
 					let         $ = cheerio.load(body)
@@ -37,7 +37,7 @@ app.get('/', (req,res) => {
 					imgArr.forEach(v => {$(v).attr('src', arr[rndNum(0,arr.length)])})
 					res.send($.html())
 				}
-			})
+			})	
 		})
 })
 
