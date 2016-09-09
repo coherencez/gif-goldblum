@@ -3,15 +3,15 @@
 
 // THIRD PARTY MODULES
 const     express = require('express')
-	,		    request = require('request')
+	,       request = require('request')
 	,       cheerio = require('cheerio')
-	,					fetch = require('node-fetch')
+	,         fetch = require('node-fetch')
 	,           app = express()
 
 // PROJECT MODULES
 	,        rndNum = require('./math')
 	,          urls = require('./urls')
-	,			 parseArr = require('./parseJSON')
+	,      parseArr = require('./parseJSON')
 	,    urlsLength = urlArr.length
 	,[,,...cliArgs] = process.argv
 
