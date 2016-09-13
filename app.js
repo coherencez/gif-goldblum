@@ -30,10 +30,10 @@ app.use((req, res, cb) => {
 
 // LOGIC
 // exit and display usage statement if no arguments are passed
-// if(!cliArgs[0]) {
-//  console.log('Usage:\n gif-goldblum [website]\n (e.g. gif-goldblum huffingtonpost.com)\n *Note*: Do not include the \'http://\' part of the the web address\n Enjoy!')
-//  process.exit(-1)
-// }
+if(!cliArgs[0]) {
+  console.log('Usage:\n gif-goldblum [website]\n (e.g. gif-goldblum huffingtonpost.com)\n *Note*: Do not include the \'http://\' part of the the web address\n Enjoy!')
+  process.exit(-1)
+}
 
 // ROUTE
 app.get('/', (req,res) => {
