@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+  div(class='container')
+    div(class='col-xs-12')
+      h1(class='main_title text-center') Welcome to Gif-Goldblum
+    div(class='col-xs-12')
+      hr
+      p.
+        Don't you just hate viewing websites with the images they force you to see? Wouldn't it be better if you could replace them all with gifs of Jeff Goldblum? Well we do too, and now we're in luck! Just type in the address of your favorite site below and click the button to get started!
+    div(class='col-xs-6 col-xs-offset-3')
+      form(method='POST' class='form')
+        div(class='form-group')
+          label(for='url') Web Address
+          input#url(type='text' class='form-control' name='url' placeholder='huffingtonpost.com')
+        div(class='form-group')
+          button(class='btn btn-primary' type='submit') Submit
