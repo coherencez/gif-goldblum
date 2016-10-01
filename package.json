@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "postinstall": "/node_modules/.bin/bower install",
+    "postinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
