@@ -28,18 +28,6 @@ app.use((req, res, cb) => {
   cb()
 })
 
-// ERROR HANDLING
-app.use((err,req,res,cb) => {
-  res.status(500).send(`Internal Server Error ${err}`)
-})
-// app.use((req, res, next) => {
-//   res.status(404).send('Sorry cant find that!')
-// })
-
-app.use((req,res,cb) => {
-  cb()
-})
-
 app.get('/', (req,res) => {
   res.render('index')
 })
@@ -66,6 +54,13 @@ app.post('/', ({body: {url}},res,err) => {
     .catch(err)
 })
 
+// ERROR HANDLING
+app.use((err,req,res,cb) => {
+  res.status(500).send(`Internal Server Error ${err}`)
+})
+app.use((req, res, next) => {
+  res.status(404).render('404')
+})
 app.listen(port, () => {
   console.log(`Open your favorite browser and cruise on over to port ${port}, be there or be square`)
 })
