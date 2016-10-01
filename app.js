@@ -31,9 +31,14 @@ app.use((err,req,res,cb) => {
   res.status(500).send(`Internal Server Error ${err}`)
 })
 
-// ROUTE
+// ROUTES
 app.get('/', (req,res) => {
   res.render('index')
+})
+
+app.post('/', (req,res) => {
+  console.log("REQ", req.body)
+  res.redirect('/')
 })
 
 app.listen(port, () => {
