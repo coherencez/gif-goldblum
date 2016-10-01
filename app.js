@@ -7,7 +7,6 @@ const     express = require('express')
   ,       request = require('request')
   ,       cheerio = require('cheerio')
   ,         fetch = require('node-fetch')
-  ,          http = require('http')
 
 // PROJECT MODULES
   ,           app = express()
@@ -32,7 +31,7 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.post('/', ({body: {url}},res,err) => {
+app.post('/', ({ body: { url }},res,err) => {
 
   let    reqUrl = `http://${url}`
    ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=jeff+goldblum&api_key=dc6zaTOxFJmzC'
