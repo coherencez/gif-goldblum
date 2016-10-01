@@ -21,20 +21,19 @@ app.set('port', port)
 // MIDDLEWARE
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
+
 app.use((req, res, cb) => {
-  // console.log(`[${Date()}]`, `${req.method}${req.url}`, req.headers['user-agent'])
-  // console.log(req)
+  console.log(`[${Date()}]`, `${req.method}${req.url}`, req.headers['user-agent'])
   cb()
 })
 
+app.use((err,req,res,cb) => {
+  res.status(500).send(`Internal Server Error ${err}`)
+})
 
 // ROUTE
 app.get('/', (req,res) => {
-  res.render('giphy')
-})
-
-app.get('/gif', (req,res) => {
-  res.render('giphy')
+  res.render('index')
 })
 
 app.listen(port, () => {
