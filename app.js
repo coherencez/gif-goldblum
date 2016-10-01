@@ -7,6 +7,7 @@ const     express = require('express')
   ,       request = require('request')
   ,       cheerio = require('cheerio')
   ,         fetch = require('node-fetch')
+  ,          http = require('http')
 
 // PROJECT MODULES
   ,           app = express()
@@ -35,11 +36,15 @@ app.use((err,req,res,cb) => {
 //   res.status(404).send('Sorry cant find that!')
 // })
 
+app.use((req,res,cb) => {
+  cb()
+})
+
 app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.post('/', ({body: {url}},res) => {
+app.post('/', ({body: {url}},res,err) => {
 
   let    reqUrl = `http://${url}`
    ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=jeff+goldblum&api_key=dc6zaTOxFJmzC'
@@ -53,11 +58,12 @@ app.post('/', ({body: {url}},res) => {
           let         $ = cheerio.load(body)
            ,     imgArr = Array.from($('img'))
 
-          imgArr.forEach(v => {$(v).attr('src', arr[rndNum(0,arr.length)])})
+          imgArr.forEach(img => $(img).attr('src', arr[rndNum(0,arr.length)]))
           res.send($.html())
         }
       })  
     })
+    .catch(err)
 })
 
 app.listen(port, () => {
