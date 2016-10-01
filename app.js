@@ -36,9 +36,25 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.post('/', (req,res) => {
-  console.log("REQ", req.body)
-  res.redirect('/')
+app.post('/', ({body: {url}},res) => {
+
+  let    reqUrl = `http://${url}`
+   ,     gifUrl = 'http://api.giphy.com/v1/gifs/search?q=jeff+goldblum&api_key=dc6zaTOxFJmzC'
+
+  fetch(gifUrl)
+    .then(res  => res.json())
+    .then(json => parseArr(json.data))
+    .then(arr  => {
+      request(reqUrl, (err, _, body) => {
+        if (!err) {
+          let         $ = cheerio.load(body)
+           ,     imgArr = Array.from($('img'))
+
+          imgArr.forEach(v => {$(v).attr('src', arr[rndNum(0,arr.length)])})
+          res.send($.html())
+        }
+      })  
+    })
 })
 
 app.listen(port, () => {
