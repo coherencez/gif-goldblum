@@ -1,0 +1,18 @@
+{
+  "name": "gif-goldblum",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Thomas Swann <tkswann@mac.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/tkswann2/gif-goldblum",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ]
+}
