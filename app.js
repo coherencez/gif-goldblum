@@ -4,7 +4,6 @@
 // THIRD PARTY MODULES
 const     express = require('express')
   ,    bodyParser = require('body-parser')
-  ,       request = require('request')
   ,       cheerio = require('cheerio')
   ,         fetch = require('node-fetch')
 
@@ -40,15 +39,16 @@ app.post('/', ({ body: { url }},res,err) => {
     .then(res  => res.json())
     .then(json => parseArr(json.data))
     .then(arr  => {
-      request(reqUrl, (err, _, body) => {
-        if (!err) {
-          let         $ = cheerio.load(body)
-           ,     imgArr = Array.from($('img'))
+      fetch(reqUrl)
+        .then(res => res.text())
+        .then(body => {
+          let $ = cheerio.load(body)
+           , imgArray = $('img').toArray()
 
-          imgArr.forEach(img => $(img).attr('src', arr[rndNum(0,arr.length)]))
-          res.send($.html())
-        }
-      })  
+           imgArray.forEach(img => $(img).attr('src', arr[rndNum(0,arr.length)]))
+           res.send($.html())
+        }) 
+        .catch(err)
     })
     .catch(err)
 })
